@@ -1,0 +1,68 @@
+<!--
+  Generated template for the NomUserStyle page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>普通用户申请车位</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list radio-group>
+    <ion-list-header>
+      日期选择
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>今天</ion-label>
+      <ion-radio value="today" checked="true" color="secondary" (ionSelect)="selectDay('0')"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>明天</ion-label>
+      <ion-radio value="tomorrow" color="secondary" (ionSelect)="selectDay('1')"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>后天</ion-label>
+      <ion-radio value="threeday" color="secondary" (ionSelect)="selectDay('2')"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+  <br/>
+  <br/>
+  <ion-list radio-group>
+    <ion-list-header>
+      时间选择
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>上午</ion-label>
+      <ion-radio checked="true" value="forenoon" color="secondary" (ionSelect)="selectTime('0')"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>下午</ion-label>
+      <ion-radio value="afternoon" color="secondary" (ionSelect)="selectTime('1')"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>全天</ion-label>
+      <ion-radio value="allday" color="secondary" (ionSelect)="selectTime('2')"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <br/>
+  <br/>
+
+  <button ion-button (click)="select()" block>车位查询</button><br>
+  <button ion-button (click)="wasSel()" block>已租车位记录查询</button>
+  提示:上午时间段为:8:00~12:00,下午时间段为:13:00~18:00,全天时间段为:8:00~18:00
+</ion-content>

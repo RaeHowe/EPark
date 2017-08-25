@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      反馈
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-card>
+      <ion-card-header style="font-size: 20px">
+        温馨提示
+      </ion-card-header>
+      <ion-card-content>
+        使用过程中,您遇到任何问题,都可以在这里进行留言,我们将会对您在使用的过程中遇到的问题,进行及时地解决,感谢您的使用以及反馈.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="information" style="width: 400px;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="submit()" block>提交反馈</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

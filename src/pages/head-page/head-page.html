@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      EPark
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>电话(用户名)</ion-label>
+      <ion-input type="text" [(ngModel)]="userInfo.telephone" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input type="password" [(ngModel)]="userInfo.password" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="login()" block>登录</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="carUserReg()" block>车位用户注册</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="nomUserReg()" block>无车位用户注册</button>
+    </ion-item>
+    <br/>
+    <br/>
+    <ion-item>
+      <button ion-button (click)="feedBack()" color="secondary">反馈</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+    </ion-fab>
+</ion-content>

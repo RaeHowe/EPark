@@ -1,0 +1,152 @@
+<!--
+  Generated template for the SubmitSite page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>出租车位</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div style="width: 115px; height: 38px; background-color: #2badad; margin-left: 70%; margin-top: 5%; position: fixed; z-index: 9999">
+    <button ion-button (click)="submitSite()" style="width: 110px; height: 36px; margin-left: 0px; background-color: #ffc900; color: black; ">提交车位信息</button>
+  </div>
+    <ion-item>
+      <h1>您的车位号是{{siteNo}}</h1>
+    </ion-item>
+    <br/><br/>
+
+  <ion-card>
+    <ion-card-content>
+      请选择您上传空车位的时间
+      <button ion-button (click)="showInfo()" style="float: right">租车规则介绍</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list radio-group>
+    <ion-list-header color="primary">
+      <h2>今天</h2>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>上午</ion-label>
+      <ion-radio checked="{{state1}}" value="forenoon" color="secondary" (ionSelect)="selectOneTime('00')" disabled="{{isSelect1}}"></ion-radio><br/>
+    </ion-item>
+
+    <button ion-button *ngIf="judge1" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy1" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy1" disabled="true" color="dark">租借您车位的人的联系方式:{{tel1}}</button>
+
+    <ion-item>
+      <ion-label>下午</ion-label>
+      <ion-radio checked="{{state2}}" value="afternoon" color="secondary" (ionSelect)="selectOneTime('01')" disabled="{{isSelect2}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge2" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy2" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy2" disabled="true" color="dark">租借您车位的人的联系方式:{{tel2}}</button>
+
+    <ion-item>
+      <ion-label>全天</ion-label>
+      <ion-radio checked="{{state3}}" value="allday" color="secondary" (ionSelect)="selectOneTime('02')" disabled="{{isSelect3}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge3" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy3" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy3" disabled="true" color="dark">租借您车位的人的联系方式:{{tel3}}</button>
+
+    <ion-item>
+      <ion-label>未出租</ion-label>
+      <ion-radio checked="{{state4}}" value="disrent" color="secondary" (ionSelect)="selectOneTime('03')" disabled="{{isSelect4}}"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list radio-group>
+    <ion-list-header color="primary">
+      <h2>明天</h2>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>上午</ion-label>
+      <ion-radio checked="{{state5}}" value="forenoon" color="secondary" (ionSelect)="selectTwoTime('10')" disabled="{{isSelect5}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge5" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy5" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy5" disabled="true" color="dark">租借您车位的人的联系方式:{{tel5}}</button>
+
+    <ion-item>
+      <ion-label>下午</ion-label>
+      <ion-radio checked="{{state6}}" value="afternoon" color="secondary" (ionSelect)="selectTwoTime('11')" disabled="{{isSelect6}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge6" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy6" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy6" disabled="true" color="dark">租借您车位的人的联系方式:{{tel6}}</button>
+
+    <ion-item>
+      <ion-label>全天</ion-label>
+      <ion-radio checked="{{state7}}" value="allday" color="secondary" (ionSelect)="selectTwoTime('12')" disabled="{{isSelect7}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge7" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy7" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy7" disabled="true" color="dark">租借您车位的人的联系方式:{{tel7}}</button>
+
+    <ion-item>
+      <ion-label>未出租</ion-label>
+      <ion-radio checked="{{state8}}" value="disrent" color="secondary" (ionSelect)="selectTwoTime('13')" disabled="{{isSelect8}}"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+
+  <ion-list radio-group>
+    <ion-list-header color="primary">
+      <h2>后天</h2>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>上午</ion-label>
+      <ion-radio checked="{{state9}}" value="forenoon" color="secondary" (ionSelect)="selectThreeTime('20')" disabled="{{isSelect9}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge9" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy9" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy9" disabled="true" color="dark">租借您车位的人的联系方式:{{tel9}}</button>
+
+    <ion-item>
+      <ion-label>下午</ion-label>
+      <ion-radio checked="{{state10}}" value="afternoon" color="secondary" (ionSelect)="selectThreeTime('21')" disabled="{{isSelect10}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge10" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy10" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy10" disabled="true" color="dark">租借您车位的人的联系方式:{{tel10}}</button>
+
+    <ion-item>
+      <ion-label>全天</ion-label>
+      <ion-radio checked="{{state11}}" value="allday" color="secondary" (ionSelect)="selectThreeTime('22')" disabled="{{isSelect11}}"></ion-radio>
+    </ion-item>
+
+    <button ion-button *ngIf="judge11" disabled="true" color="secondary">车位信息已经提交</button>
+    <button ion-button *ngIf="judgeOccupy11" disabled="true" color="danger">车位已经被出租</button>
+    <button ion-button *ngIf="judgeOccupy11" disabled="true" color="dark">租借您车位的人的联系方式:{{tel11}}</button>
+
+    <ion-item>
+      <ion-label>未出租</ion-label>
+      <ion-radio checked="{{state12}}" value="disrent" color="secondary" (ionSelect)="selectThreeTime('23')" disabled="{{isSelect12}}"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+  <!--<button ion-button (click)="submitSite()" block>提交车位信息</button>-->
+
+  提示:上午时间段为:8:00~12:00,下午时间段为:13:00~18:00,全天时间段为:8:00~18:00
+</ion-content>

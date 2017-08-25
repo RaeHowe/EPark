@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      租赁车位记录
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let obj of showSiteInfo;">
+        租赁车位用户电话:{{obj.customertel}}<br>
+        租赁车位用户的用户名:{{obj.customername}}<br>
+        租赁的车位号:{{obj.siteno}}<br>
+        被租赁车位用户的电话:{{obj.vendortel}}<br>
+        被租赁车位用户的用户名:{{obj.vendorname}}<br>
+        开始时间:{{obj.starttime}}<br>
+        结束时间:{{obj.endtime}}
+    </ion-item>
+  </ion-list>
+</ion-content>

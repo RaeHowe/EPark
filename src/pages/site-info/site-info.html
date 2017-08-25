@@ -1,0 +1,24 @@
+<!--
+  Generated template for the SiteInfo page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>半天车位信息</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let obj of showSiteInfo; let i = index;">
+      <button ion-button disabled="true" color="secondary">{{showDay}}</button>
+      <button ion-button disabled="true" color="danger">{{showTime}}</button><br>
+      车位号:{{obj.parknum}}<br/>
+      开始时间:{{obj.start_time}}<br>
+      结束时间:{{obj.end_time}}<br>
+      <button ion-button (click)="confirmBill(obj, i)">选择</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

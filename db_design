@@ -1,0 +1,274 @@
+
+服务器：
+
+9.111.109.82
+root/passw0rd  
+lbsadmin/lbsadmin
+
+数据库:
+
+su - postgresql    
+username:epark   
+password:epark    
+
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝表设计===＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+创建用户和数据库
+
+＃createuser -dsSP epark
+Enter password for new role: 
+Enter it again: 
+createuser: creation of new role failed: ERROR:  role "epark" already exists
+
+＃createdb -O epark eparkdb
+localhost:bin postgres$ psql -U epark -d eparkdb -h localhost
+
+ 
+@原始档案表：   archive
+用户导入物业的信息，用于在用户注册时进行校验
+
+telephone: 车主电话
+parknum： 车位号
+carnum： 车号
+
+# create table archive ( telephone char(20), parknum char (8), carnum char (10));
+
+
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
+@用户信息表：  parkuser
+
+id: 唯一id
+orgnum: 机构号（目前ibm）
+telephone  
+name: 
+carnum：车号
+password: 密码
+
+＃create table parkuser (id int not null primary key default nextval('id_seq'),telephone char(20),name char(50), carnum char(10), password char(20))
+
+
+
+场景1:
+用户注册后：
+insert into parkuser (telephone,name,carnum,password ) values ('13701010693','lys','Q01t17','123456');
+
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
+@系统车位信息表: systemparkinfo
+
+id: 唯一id
+telephone: 联系人电话
+carnum: 车号
+parknum: 车位号
+
+#create table systemparkinfo (id int not null primary key default nextval('id_seq'), telephone char(20), carnum char(10), parknum char(8))
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+@车位信息表： parkspace
+
+id：  唯一id  （系统生成）
+currentownertelephone：车位主人电话 （必填）  注册时生成校验码发到手机，才能完成注册
+ownertelephone: 原始车位主人电话  最初注册的车位主人电话，可以转让给其他人，修改currentownertelephone， 刚注册时这两个信息相同
+parknum： 车位号  （有车位的必填）后与电话号码一同到archive表进行校验
+
+
+＃ create table parkspace(id int not null primary key default nextval('id_seq'), currentownertelephone char(20), ownertelephone char(20),parknum char(10));
+
+
+场景1:
+用户注册后，如果该用户有车位，需要填写下表,currentownertelephone 和parkuser表中的telephone相同，该值会作为关联字段）
+如果该用户无车位，不用插入这个表。
+
+insert into parkspace(currentownertelephone,ownertelephone,parknum) values ('13701010693','','167');
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+@车位使用信息表：  parkinfo
+
+parkinfo
+id: 唯一id
+
+parknum: 车位id
+start_time:   开始时间
+end_time:     结束时间
+
+daymark:  (char1)    0.今天   1.明天,  2.后天 
+phasemark: (char1)   0.上午   1.下午,  2.全天
+
+
+status：      被占用状态  (0, 表示没有被占用， 1， 表示被占用）
+telephone：        占用人的电话
+
+# create table parkinfo(id int not null primary key default nextval('id_seq'), parknum char(10), start_time timestamp, end_time timestamp, daymark char(1), phasemark char(1), status boolean, telephone text);
+
+场景2:  发布车位
+选择，今天，明天，后天，选择（全天，上午，下午,未发布）后提交
+
+以选择今天，全天，为例子： 取得系统当前日期，例如：20170215
+
+insert into parkinfo (parknum,start_time,end_time,daymark,phasemark,status,telephone) values ('167','2017-02-09 09:00','2017-02-09 12:00',0,0,false,'13701010693');
+insert into parkinfo (parknum,start_time,end_time,daymark,phasemark,status,telephone) values ('167','2017-02-09 09:00','2017-02-09 12:00',0,1,false,'13701010693');
+
+场景3:  查找并定一个车位
+
+例如：定了今天下午的：
+
+update parkinfo set status=true,telephone='13566666666' where parknum='167' and daymark='0' and phasemark='1' and status=false
+判断 返回如果是1， 表示成功，如果是0 表示没有定上
+多条记录考虑commit和rollback
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+@车位使用log   parkinfolog
+
+id:   
+orgnum：		  机构号  //版本1.0不需要
+parknum: 	  车位id
+start_time:   开始时间
+end_time:     结束时间
+status：      被占用状态 //我觉得不需要这个字段
+telephone：   占用人电话  
+amount:       转的钱  //版本1.0不需要
+
+
+v1.0 (不带有支付功能的表)
+# create table parkinfolog(id int not null primary key default nextval('id_seq'), parknum char(10), start_time timestamp ,end_time timestamp, telephone text);
+
+v2.0 (带有支付功能的表)
+# create table parkinfolog(id int not null primary key default nextval('id_seq'), orgnum char(5), parknum char(10), start_time timestamp ,end_time timestamp, status boolean, telephone text,amount money);
+
+
+每日日终批处理过程:
+第一步:将所有status 是true的今天的纪录备份到parkinfolog中
+  insert into public.parkinfolog (parknum, start_time, end_time, telephone) select parknum, start_time, end_time, telephone from public.parkinfo where status = true and daymark = '0';  //今天租出去的车辆信息插入到历史记录表中
+
+第二步:删除掉今天的车位记录
+  delete from public.parkinfo where daymark = '0'; 
+
+第三步:修改状态，将所有的明天（daymark  1->0）的改为今天，后天的改为明天（daymark  2->1）
+  update public.parkinfo set daymark = cast(cast(daymark AS integer) - 1 AS character) where cast(daymark AS integer) > 0;
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+@账单记录   bill
+
+#create table bill(customertel text, customername text, siteno text, vendortel text, vendorname text, starttime text, endtime text);
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝=
+
+@反馈记录 retroaction
+
+create table retroaction(id int not null primary key default nextval('id_seq'), information text);
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝=
+
+＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+自增成长id的使用方法
+create sequence id_seq increment 1 minvalue 1 maxvalue 9223372036854775807 cache 1;
+create table test ( id int not null primary key default nextval('id_seq'), name varchar (30));
+insert into test (name) values ('fsffsdf');
+
+
+默认“未出租”选中
+
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+测试场景：
+
+       	电话   用户名   密码    状态       车牌号   车位号
+用户一: 	111	   user1   123 (有车位用户)	 1001	 001
+用户二:  222    user2   123 (有车位用户)	 1002	 002
+用户三:  333    user3   123 (有车位用户)	 1003	 003
+用户四:  444    user4   123 (无车位用户)	 1004     无
+用户五:  555    user5   123 (无车位用户)	 1005 	  无
+用户六:  666    user6   123 (无车位用户)	 1006	  无
+
+录入的车位信息:
+	------------------------------------------
+	|    today   |   tomorrow  |aftertomorrow|
+	|————————————|—————————————|—————————————|
+上午	| user1,user2|    user1    |     user3   |
+	|————————————|—————————————|—————————————|
+下午	|	         |    user2    | user3,user1 |
+    ------------------------------------------  
+
+场景1:有车位用户进行注册	(测试通过)
+	在有车位用户的注册页面中，输入必要的用户信息，并且必须保证不能为空。注册完毕之后，会在parkuser表中添加一条用户信息，并且在parkspace表中添加该用户的车位信息。
+场景2:无车位用户进行注册	(测试通过)
+	在无车位用户的注册页面中，输入必要的用户信息，并且必须保证不能为空。注册完毕之后，会在parkuser表中添加一条用户信息。
+场景3:登录操作	(测试通过)
+	在首页的登录页面中，会根据用户的类型跳转到不同的页面中，如果是有车位的用户，会跳转到具有提交车位和我要租车功能的页面；无车位用户会跳转到只具有租车功能的页面中去。
+场景4:租车   (测试通过)
+	用户在租车页面中，如果是有车位用户的话，他们不能查询到自己所提交的车位信息；无车位用户会查询到所有根据时间进行筛选的车位信息。 
+		user4租赁了今天上午(user1)的车位、明天下午(user2)的车位和后天下午(user3)的车位
+		user5租赁了后天下午(user1)的车位
+		user6租赁了今天上午(uesr2)的车位和后天上午(user3)的车位
+		user1的明天上午的车位没有被出租出去
+	※场景4.1:
+		因为user3提交了一个后天全天的车位信息，所以当其他的用户想要查询后天上午或者下午的车位信息的时候，都不会查询到user3提交的车位信息，当选择后天全天的时候，才会查询到。并且查询到之后，用户可以选择只租赁全天中，上午或者下午的车位信息。（user4租赁了user3提交的全天车位中的下午时间段，所剩下的上午时间段的车位信息还是会被显示在全天选项中,因为决定车位信息显示的元素是提交车位用户所选择的车位类型，不在于时间段本身）
+场景5:上传车位  (测试通过)
+	在上传车位的页面中，用户分别可以选择上传今天至后天的车位信息，每一天都是单选，包括了上午、下午、全天。比如今天上午的车位被租出去之后，他之后还可以进行发布今天下午的车位信息。全天的车位信息如果上午时间段被选择了之后，那么就相当于全天已经被租出去了，不能再次选择这一天里上午或者下午的车位信息。而租车的用户可以看到全天中其他时间段
+	的车位信息。
+场景6:查询租赁的历史记录 (测试通过)
+	用户租赁完车位信息之后，可以到指定的页面中查询自己已经租赁的车位信息。
+
+案例:
+	一、用户user1发布了一个今天上午和后天下午的车位，user2发布了一个今天上午和明天下午的车位，user3发布了一个后天全天的车位。
+	二、user4进行车位的查看，user4可以查看到今天上午user1发布的车位信息，可以查看到明天下午user2发布的车位信息，可以查看到后天全天user3发布的车位信息（前端显示为两个数据，分别是后天上午和下午user3发布的车位信息）
+	三、user4把其他用户所出租的车位都租下了。当用户再次查询今天上午的车位信息的时候，已经查不到相应的数据信息了；当用户再次查询明天下午的车位信息的时候，已经查不到相应的数据信息了；当用户比如只租了后天上午的车位信息的时候，因为后天所出租的车位是全天类型的，所以下午的车位信息依然可以查询到，并且所显示的数据信息依然是显示在全天车位类型中。
+	四、出租车位的用户也可以进行车位的租赁，但是不能够查询到自己所出租的车位信息。并且如果自己出租了一个全天的车位信息，比如全天中的上午时间段的车位被出租了之后，那么也算作全天的车位已经被出租了，无法再次提交该日期下午时间段的车位信息了。
+
+user4租赁了今天上午(user1)的车位、明天下午(user2)的车位和后天上午(user3)的车位
+user5租赁了今天下午(user1)的车位
+user6租赁了今天上午(uesr2)的车位
+
+1.注册有车位的用户
+2.注册无车位的用户 
+3.不同类型的用户登录是否跳转到不同的页面 
+4.有车位用户提交车位信息是否准确
+5.无车位用户查询车位信息是否准确
+6.车位被租出去之后，车位的状态信息是否被改为true,并且页面中需要进行出租信息的控制：比如明天上午的车位被租出去了之后，那么该用户就不能再次提交明天全天的车位信息了。
+7.车位用户如果需要进行停车的话，他不能查询到自己所出租的车位信息
+8.一个用户提交了一个全天的车位信息,另一个用户查询这天的全天的车位信息，那么在前端进行展示的是上午和下午两条数据信息，当用户选择租了一个时间段的车位之后，那么这条全天的数据信息都
+
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+=＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+update:（严重问题）
+1.时间问题
+2.车位租完之后可以查询到租车位的信息.(新添加一个页面信息)
+3.租车完毕之后页面的跳转问题
+
+7月17日的项目优化及bug解决:
+(1).实现了前端调用服务端的ip地址以及端口号的变量全局化
+
+7月18日的项目优化及bug解决:
+(1).新增:用户查看自己已经租赁了的车位信息
+(2).修改:时间的显示bug问题
+
+7月19日的项目优化及bug解决:
+(1).修改:租车完毕之后页面的跳转问题（现在已经基本解决了，但是并不是最优的解决方法，之后会查看官方文档寻找更优的解决方法）
+(2).修改:解决了车位用户查询车位信息查询不到数据信息的bug问题。
+(3).新增:修改了系统中的/etc/crontab文件，进行跑批作业（文件编写完毕，目前在编写shell脚本过程中）
+(4).新增:新增了用户提交反馈信息的功能（现在用户在使用过程中需要的问题，可以在这个页面中进行反馈）
+(5).测试:编写完毕了测试场景文档，成功进行过一次系统的测试过程，并且进行完一次跑批作业。
+(6).问题:服务器的时间好像比北京时间慢了1分50秒的时间。
+(7).开始:服务端开启了nodejs和ionic两个进程，使用命令:ps -ef | grep ionic进行查看,使用命令 node app.js & 开启一个进程
