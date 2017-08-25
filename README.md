@@ -1,0 +1,1 @@
+基于ionic2开发的一个停车系统demo，里面包括了ionic2和nodejs
