@@ -12,9 +12,7 @@
         <button ion-button disabled="true" style="background-color: #ffc900">{{showDay}}</button>
         <button ion-button disabled="true" style="background-color: #ffc900">{{showTime}}</button><br>
         车位号:{{obj.parknum}}<br/>
-        <!--车主:{{obj.}}-->
-        <!--车主电话:-->
-        <button ion-button (click)="selectForenoon()" color="secondary">租赁上午时间段</button>
+        <button ion-button (click)="selectForenoon(obj.parknum)" color="secondary">租赁上午时间段</button>
         <button ion-button (click)="selectAfternoon()" color="secondary">租赁下午时间段</button>
         <button ion-button (click)="selectAllday()" color="danger">租赁全天</button>
       </ion-item>

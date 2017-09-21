@@ -17,6 +17,8 @@
   <ion-list>
     <ion-item>
       车位号:{{siteInfo.parknum}}<br/>
+      车位主人:{{vendorname}}<br/>
+      车位主人电话:{{telephone}}<br/>
       停车时间:<br/>
       从:{{starttime}} 至:{{endtime}}
       <button ion-button (click)="confirm()" block>提交订单</button>
